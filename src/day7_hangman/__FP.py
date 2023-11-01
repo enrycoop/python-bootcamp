@@ -1,6 +1,6 @@
 import random
-from ascii import stages, logo
-from words import word_list
+from __ascii import stages, logo
+from __words import word_list
 
 print(logo)
 
