@@ -1,5 +1,3 @@
-# TODO: 2. Check resources sufficient to make drink order.
-
 MENU = {
     "espresso": {
         "ingredients": {
@@ -78,7 +76,6 @@ def make_coffee(drink_name, order_ingredients):
 
 is_on = True
 
-# TODO: 1. Print report of all caffee machine resources
 while(is_on):
     choice = input("What would you like? (espresso/latte/cappuccino): ")
     if choice == "off":
