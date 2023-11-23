@@ -33,6 +33,14 @@ class Snake:
 
         self.head.forward(MOVE_DISTANCE)
 
+    def extend(self):
+        """add a new segment to the snake."""
+        s = Turtle(shape="square")
+        s.penup()
+        s.color("white")
+        s.goto(self.segments[-1].xcor(), self.segments[-1].ycor())  # last element of the list
+        self.segments.append(s)
+
     def up(self):
         if self.head.heading() != DOWN:
             self.head.seth(UP)
