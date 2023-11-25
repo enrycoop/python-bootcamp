@@ -20,3 +20,4 @@ class Shape(Turtle):
 
     def go_right(self):
         self.goto(self.xcor() + 20, self.ycor())
+

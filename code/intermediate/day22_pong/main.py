@@ -8,54 +8,36 @@ screen = Screen()
 screen.bgcolor("black")
 screen.setup(width=800, height=600)
 screen.title("Pong")
-screen.listen()
 screen.tracer(0)
-
 
 r_paddle = Paddle(350, 0)
 l_paddle = Paddle(-350, 0)
 ball = Ball()
 
+screen.listen()
 screen.onkey(r_paddle.go_up, "Up")
 screen.onkey(r_paddle.go_down, "Down")
-
 screen.onkey(l_paddle.go_up, "w")
 screen.onkey(l_paddle.go_down, "s")
 
 
 while True:
     screen.update()
-    ball.go_forward()
+    ball.move()
     time.sleep(0.003)
 
     # detect collision with wall and bounce
-    if ball.ycor() > 350:
-        if ball.heading() < 90:
-            ball.setheading(ball.heading() - 90)
-        else:
-            ball.setheading(ball.heading() + 90)
+    if ball.ycor() > 290 or ball.ycor() < -290:
+        ball.bounce_y()
 
-    if ball.ycor() < -350:
-        if ball.heading() > 270:
-            ball.setheading(ball.heading() + 90)
-        else:
-            ball.setheading(ball.heading() - 90)
+    # detect collision with paddle
+    if ball.distance(r_paddle) < 50 and ball.xcor() > 330\
+            or ball.distance(l_paddle) < 50 and ball.xcor() < -330:
+        ball.bounce_x()
 
-    # detect collision with wall and bounce
-    if ball.distance(r_paddle) < 10:
-        if 90 > ball.heading() > 0:
-            ball.setheading(ball.heading() + 90)
-        else:
-            ball.setheading(ball.heading() - 90)
+    if ball.xcor() > 400 or ball.xcor() < -400:
+        ball.goto(0,0)
 
-    if ball.distance(l_paddle) < 10:
-        if 180 > ball.heading() > 90:
-            ball.setheading(ball.heading() - 90)
-        else:
-            ball.setheading(ball.heading() + 90)
-
-    if ball.xcor() > 350 or ball.xcor() < -350:
-        ball.home()
 
 
 
