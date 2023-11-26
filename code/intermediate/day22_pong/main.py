@@ -1,30 +1,35 @@
 import time
 from turtle import Screen
 from paddle import Paddle
+from scoreboard import Scoreboard
 from ball import Ball
 
-
+# setup screen
 screen = Screen()
 screen.bgcolor("black")
 screen.setup(width=800, height=600)
 screen.title("Pong")
 screen.tracer(0)
+screen.listen()
 
+# game widgets
 r_paddle = Paddle(350, 0)
 l_paddle = Paddle(-350, 0)
 ball = Ball()
+scoreboard = Scoreboard()
 
-screen.listen()
+# setup command listeners
 screen.onkey(r_paddle.go_up, "Up")
 screen.onkey(r_paddle.go_down, "Down")
 screen.onkey(l_paddle.go_up, "w")
 screen.onkey(l_paddle.go_down, "s")
 
 
+# start game logic
 while True:
     screen.update()
     ball.move()
-    time.sleep(0.003)
+    time.sleep(ball.move_speed)
 
     # detect collision with wall and bounce
     if ball.ycor() > 290 or ball.ycor() < -290:
@@ -35,11 +40,12 @@ while True:
             or ball.distance(l_paddle) < 50 and ball.xcor() < -330:
         ball.bounce_x()
 
-    if ball.xcor() > 400 or ball.xcor() < -400:
-        ball.goto(0,0)
+    # detect R paddle misses
+    if ball.xcor() > 400:
+        ball.reset_position()
+        scoreboard.r_point()
 
-
-
-
-
-screen.exitonclick()
+    # detect L paddle misses
+    if ball.xcor() < -400:
+        ball.reset_position()
+        scoreboard.l_point()
