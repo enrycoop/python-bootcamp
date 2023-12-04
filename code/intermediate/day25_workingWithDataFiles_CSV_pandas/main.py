@@ -19,11 +19,22 @@
 #             temperatures.append(int(row[1]))
 #     print(temperatures)
 
-
 import pandas
 
+"""
+In pandas abbiamo due tipi di struture dati 
+1D series
+2D dataframe
+"""
+
 data = pandas.read_csv("./weather_data.csv")
-print(data["temp"])
+# print(type(data))
+# print(type(data["temp"]))
+
+data_dict = data.to_dict()
+print(data_dict)
+
+
 
 
 
