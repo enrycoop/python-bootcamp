@@ -4,8 +4,8 @@ PascalCase notation per i nomi delle classi
 snake_case per il resto
 """
 
+
 class User:
-    
     def __init__(self, user_id, username):
         print("new user being creaded...")
         self.id = user_id

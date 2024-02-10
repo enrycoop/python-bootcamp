@@ -17,6 +17,6 @@ print(3.14159)
 
 #Boolean
 
-True
-False
+a = True
+b = False
 

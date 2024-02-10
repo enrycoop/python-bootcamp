@@ -2,8 +2,8 @@ import random
 letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
            'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
            'w', 'x', 'y', 'z']
-letters += [l.upper() for l in letters]
-numbers = [str(n) for n in range(0,10)]
+letters += [letter.upper() for letter in letters]
+numbers = [str(n) for n in range(0, 10)]
 symbols = ['!', '#', '$', '%', '&', '(', ')', '+', '*']
 
 print("Welcome to the PyPassword generator!")

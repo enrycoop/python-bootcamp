@@ -2,6 +2,7 @@ from question_model import Question
 from data import question_data
 from quiz_brain import QuizBrain
 
+# Instantiate the Question object
 question_bank = []
 for question in question_data:
     question_text = question['question']

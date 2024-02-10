@@ -31,6 +31,7 @@ DEEP_STATUSES = [
     }
 ]
 
+
 def z_move():
     global DEEP
     global frequency
@@ -70,6 +71,7 @@ def move(turtle):
             deep += deep_step
             turtle.forward(SINGLE_STEP)
 
+
 def change_direction(turtle):
     turtle.right(90 * random.choice(DIRECTIONS))
 
@@ -81,13 +83,11 @@ tim = Turtle()
 tim.color("bisque4")
 tim.speed(10)
 
-
 for _ in range(20):
     tim.color(random.choice(COLORS))
     for _ in range(20):
         change_direction(tim)
         move(tim)
-    
 
 screen.exitonclick()
 

@@ -1,6 +1,9 @@
 # Calculator
 import __art
+
 print(__art.logo)
+
+
 def add(n1, n2):
     return n1 + n2
 
@@ -44,5 +47,6 @@ def calculator():
             calculator()
 
     print(f"{num1} {operatiom_symbol} {num2} = {answer}")
+
 
 calculator()
