@@ -1,5 +1,6 @@
 from tkinter import *
 import math
+import vlc
 
 # ---------------------------- CONSTANTS ------------------------------- #
 reps = 0
@@ -12,6 +13,7 @@ WORK_MIN = 25
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
 timer = None
+player = vlc.MediaPlayer("resources/countdown.mp3")
 
 
 # ---------------------------- TIMER RESET ------------------------------- #
@@ -26,6 +28,7 @@ def reset_timer():
     title_label.config(text="Timer", fg=GREEN)
     # reset check_marks
     check_label.config(text="")
+
 
 # ---------------------------- TIMER MECHANISM ------------------------------- #
 def start_pomodoro():
@@ -48,10 +51,15 @@ def start_pomodoro():
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
 def count_down(count):
+    global player
     count_min = math.floor(count / 60)
     count_sec = int(count % 60)
+    if int(count_min) < 1 and int(count_sec) == 4:
+        player.play()
     if count_min < 10:
         count_min = f"0{count_min}"
+    if int(count_sec) == 0:
+        player.stop()
     if count_sec < 10:
         count_sec = f"0{int(count_sec)}"
 
@@ -62,7 +70,7 @@ def count_down(count):
     else:
         start_pomodoro()
         check_marks = ""
-        work_sessions = math.floor(reps/2)
+        work_sessions = math.floor(reps / 2)
         for _ in range(work_sessions):
             check_marks += "✓"
         check_label.config(text=check_marks)
