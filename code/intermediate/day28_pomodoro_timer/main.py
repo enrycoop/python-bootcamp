@@ -4,10 +4,10 @@ import vlc
 
 # ---------------------------- CONSTANTS ------------------------------- #
 reps = 0
-PINK = "#e2979c"
-RED = "#e7305b"
-GREEN = "#9bdeac"
-YELLOW = "#f7f5dd"
+PINK = "#F0F3FF"
+RED = "#15F5BA"
+GREEN = "#836FFF"
+YELLOW = "#211951"
 FONT_NAME = "Courier"
 WORK_MIN = 25
 SHORT_BREAK_MIN = 5
