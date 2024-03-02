@@ -32,8 +32,8 @@ def in_range():
     latitude = float(data_response['iss_position']['latitude'])
 
     iss_position = (longitute, latitude)
-    print(iss_position)
-    return abs(abs(iss_position[0]) - abs(MY_LONG)) <= 5 and abs(abs(iss_position[1]) - abs(MY_LAT)) <= 5
+    print(f"iss position: {iss_position}, my coordinates: ({MY_LONG}, {MY_LAT})")
+    return MY_LAT - 5 <= latitude <= MY_LAT + 5 and MY_LONG - 5 <= longitute <= MY_LONG + 5
 
 
 def is_night():
@@ -54,17 +54,25 @@ def is_night():
     print(sunset)
 
     time_now = datetime.now().hour
+    print(f"time check: {sunrise} < {time_now} < {sunset}")
     return not sunrise < time_now < sunset
 
 
 while True:
-    time.sleep(60)
-    if is_night() and in_range():
+
+    message = ""
+    if in_range():
+        message = "La ISS sta passando sopra di te!"
+
+        if not is_night():
+            message += " Ti sarà difficile vederla adesso :("
+
         with smtplib.SMTP("smtp.gmail.com") as connection:
             connection.starttls()
             connection.login(user=my_email, password=password)
             connection.sendmail(
                 from_addr=my_email,
                 to_addrs="enrycoop92@gmail.com",
-                msg="Subject:Alza la testa!\n\n La ISS sta passando sopra di te!")
-
+                msg=f"Subject:Alza la testa!\n\n{message}")
+        print("SEND MESSAGE!!!! THE ISS IS PASSING FROM HERE!!!!!")
+    time.sleep(60)
